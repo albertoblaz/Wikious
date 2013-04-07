@@ -38,7 +38,7 @@ Entry.prototype.update = function(title, content, tags) {
 };
 
 
-Entry.prototype.addObserver = function(obs) {
+Entry.prototype.addObservers = function(obs) {
     this.observers.push(obs);
 };
 
