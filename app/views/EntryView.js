@@ -39,7 +39,7 @@ EntryView.prototype.createDOM = function() {
                     '<li class="arrow selectable">',
                         '<a href="#post" data-router="section">',
                             '<strong class="title"></strong>',
-                            '<small class="content">',
+                            '<small class="content"></small>',
                         '</a>',
                     '</li>'
                     ].join(' ');
