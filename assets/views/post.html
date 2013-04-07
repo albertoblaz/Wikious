@@ -1,0 +1,59 @@
+<section id="post" data-transition="slide">
+
+    <header data-title="Post nº 1" class="">
+        <nav>
+            <a href="#back" data-router="section" data-icon="left" data-label="Blog"></a>
+        </nav>
+
+        <nav class="right">
+            <a href="#back" data-router="section" data-icon="remove"></a>
+        </nav>
+    </header>
+
+    <article class="active">
+
+        <style>
+            .input { height : 10%; }
+            .content { height : 80%; }
+
+            .form { height : 88%; }
+
+            .footer {
+                padding: 7px 10px;
+                height : 12%;
+            }
+
+            .footer .button { width : 45%; }
+
+            .button .icon {
+                margin-right: 5px;
+                position: relative;
+                top: 1px;
+            }
+        </style>
+
+        <form class="form">
+            <fieldset class="input">
+                <label>Title:</label>
+                <input type="text" value="">
+            </fieldset>
+
+            <fieldset class="content">
+                <label>Content:</label>
+                <input type="text" value="">
+            </fieldset>
+
+            <fieldset class="input">
+                <label>Tags:</label>
+                <input type="text" value="">
+            </fieldset>
+        </form>
+
+        <footer class="footer">
+            <a href="#back" data-router="section" data-icon="check"  class="button left">Done</a>
+            <a href="#back" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
+        </footer>
+
+    </article>
+
+</section>
