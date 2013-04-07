@@ -95,6 +95,29 @@
         });
     </script>
 
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script src="app/models/Blog.js"></script>
+    <script src="app/models/Comment.js"></script>
+    <script src="app/models/User.js"></script>
+
+    <script src="app/models/Entry.js"></script>
+    <script src="app/views/EntryView.js"></script>
+	<script src="app/controllers/EntryController.js"></script>
+
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var entry = new Entry();
+			var ev = new EntryView(entry);
+			entry.update("titulo","contenido","tags");
+			ev.notify();
+			ev.notify();
+			$("#entries").append(ev.el);
+		});
+	</script>
+
+
 </body>
 
 </html>
