@@ -2,11 +2,11 @@
 
     <header data-title="Post nº 1" class="">
         <nav>
-            <a href="#back" data-router="section" data-icon="left" data-label="Blog"></a>
+            <a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog"></a>
         </nav>
 
         <nav class="right">
-            <a href="#back" data-router="section" data-icon="remove"></a>
+            <a href="#back" id="remove" data-router="section" data-icon="remove"></a>
         </nav>
     </header>
 
@@ -14,6 +14,8 @@
 
         <style>
             .input { height : 10%; }
+			.title { height : 10%; }
+			.tags { height : 10%; }
             .content { height : 80%; }
 
             .form { height : 88%; }
@@ -32,26 +34,26 @@
             }
         </style>
 
-        <form class="form">
-            <fieldset class="input">
+        <form id="entry" class="form">
+            <fieldset class="title">
                 <label>Title:</label>
-                <input type="text" value="">
+                <input id="title" type="text" value="">
             </fieldset>
 
             <fieldset class="content">
                 <label>Content:</label>
-                <input type="text" value="">
+                <input id="content" type="text" value="">
             </fieldset>
 
-            <fieldset class="input">
+            <fieldset class="tags">
                 <label>Tags:</label>
-                <input type="text" value="">
+                <input id="tags" type="text" value="">
             </fieldset>
         </form>
 
         <footer class="footer">
-            <a href="#back" data-router="section" data-icon="check"  class="button left">Done</a>
-            <a href="#back" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
+            <a id="acceptEntry" href="#back" data-router="section" data-icon="check"  class="button left">Done</a>
+            <a id="cancel"      href="#back" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
         </footer>
 
     </article>
