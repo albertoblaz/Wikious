@@ -1,5 +1,5 @@
 
-var EntryView = function(model, el) {
+var CommentView = function(model, el) {
     this.model = model;
     this.el    = el || undefined;
 
@@ -10,7 +10,7 @@ var EntryView = function(model, el) {
 /**
  * Method invoked by the model to notify an update
  */
-EntryView.prototype.notify = function() {
+CommentView.prototype.notify = function() {
     this.render();
 };
 
@@ -18,15 +18,14 @@ EntryView.prototype.notify = function() {
 /**
  * Renders the view when is created or after the model has been changed
  */
-EntryView.prototype.render = function() {
+CommentView.prototype.render = function() {
 
     //this.el = this.el || this.createDOM();
     if (! this.el) {
         this.el = this.createDOM();
     }
 
-    this.el.find('.title').text(this.model.title);
-    this.el.find('.content').text(this.model.content);
+    this.el.find('.text').text(this.model.text);
 
 };
 
@@ -34,20 +33,14 @@ EntryView.prototype.render = function() {
 /**
  * Creates the DOM element
  */
-EntryView.prototype.createDOM = function() {
+CommentView.prototype.createDOM = function() {
     var template = [
                     '<li class="arrow selectable">',
                         '<a href="#post" data-router="section">',
-                            '<strong class="title"></strong>',
-                            '<small class="content"></small>',
+                            '<strong class="text"></strong>',
                         '</a>',
                     '</li>'
                     ].join(' ');
 
     return $(template);
-};
-
-
-EntryView.prototype.remove = function() {
-    this.el.remove();
 };

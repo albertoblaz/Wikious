@@ -46,8 +46,3 @@ EntryView.prototype.createDOM = function() {
 
     return $(template);
 };
-
-
-EntryView.prototype.remove = function() {
-    this.el.remove();
-};

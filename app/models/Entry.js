@@ -32,9 +32,9 @@ Entry.prototype.update = function(title, content, tags) {
     this.content = content;
     this.tags    = tags;
 
-    for (var o in this.observers) {
+ /*   for (var o in this.observers) {
         o.notify();
-    }
+    }*/
 };
 
 

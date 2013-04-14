@@ -12,18 +12,17 @@ var EntryController = function(html) {
     this.model = new Entry();
     this.view = new EntryView(this.model);
 
-   // this.update();  // Get the received data and update the model
+    this.update();  // Get the received data and update the model
 
     var observers = [this, this.view];
     this.model.addObservers(observers);
 };
 
 
-EntryController.prototype.update = function(html) {
-    this.html = html;
-    var newTitle   = this.html.find('#title').val();
-    var newContent = this.html.find('#content').val();
-    var newTags    = this.html.find('#tags').val();
+EntryController.prototype.update = function() {
+    var newTitle   = this.html.find('.title').text();
+    var newContent = this.html.find('.content').text();
+    var newTags    = this.html.find('.tags').text();
 
     this.model.update(newTitle, newContent, newTags);
 };
@@ -35,11 +34,6 @@ EntryController.prototype.remove = function() {
     this.view.destroy();
     */
     this.model = null;
-    this.view.remove();
+    this.view  = null;
+    this = null;
 };
-
-EntryController.prototype.done = function() {
-
-
-}
-
