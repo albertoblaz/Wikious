@@ -1,6 +1,6 @@
 <section id="post" data-transition="slide">
 
-    <header data-title="Post nº 1" class="">
+    <header data-title="Post nº 1" class="title">
         <nav>
             <a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog"></a>
         </nav>
@@ -11,28 +11,6 @@
     </header>
 
     <article class="active">
-
-        <style>
-            .input { height : 10%; }
-			.title { height : 10%; }
-			.tags { height : 10%; }
-            .content { height : 80%; }
-
-            .form { height : 88%; }
-
-            .footer {
-                padding: 7px 10px;
-                height : 12%;
-            }
-
-            .footer .button { width : 45%; }
-
-            .button .icon {
-                margin-right: 5px;
-                position: relative;
-                top: 1px;
-            }
-        </style>
 
         <form id="entry" class="form">
             <fieldset class="title">
@@ -52,8 +30,8 @@
         </form>
 
         <footer class="footer">
-            <a id="acceptEntry" href="#back" data-router="section" data-icon="check"  class="button left">Done</a>
-            <a id="cancel"      href="#back" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
+            <a href="#back" id="done"   data-router="section" data-icon="check"  class="button left">Done</a>
+            <a href="#back" id="cancel" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
         </footer>
 
     </article>

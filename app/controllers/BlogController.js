@@ -1,34 +1,44 @@
 
-/**
- * Lo que hago aqui es crear el modelo y la vista (a la que se le pasa el modelo)
- * Al modelo hay que pasarle los datos (title, content y tags)
- * pero tendria que recogerlos del HTML tanto aqui como en el metodo update
- * Por eso haciendolo de esta manera, esa parte del codigo solo esta escrita una vez en el 'update'
- * Y luego le paso los observadores al modelo
- */
-var EntryController = function(html) {
-    this.html = html;
+var BlogController = function(model, view) {
+    this.el = $('#posts');
 
-    this.model = new Entry();
-    this.view = new EntryView(this.model);
+    this.model = model;
+    this.view  = view;
 
-    this.update();  // Get the received data and update the model
+    this.render();
 
-    var observers = [this, this.view];
-    this.model.addObservers(observers);
+    this.model.addObservers( [this, this.view] );
 };
 
 
-EntryController.prototype.update = function() {
-    var newTitle   = this.html.find('.title').text();
-    var newContent = this.html.find('.content').text();
-    var newTags    = this.html.find('.tags').text();
-
-    this.model.update(newTitle, newContent, newTags);
+BlogController.prototype.notify = function() {
+    this.render();
 };
 
 
-EntryController.prototype.remove = function() {
+BlogController.prototype.render = function() {
+
+    this.el.find('.name').children('.title.centered').text( this.model.name );
+
+    var that = this;
+    this.el.find('.add-entry').on('click', function() {
+        that.createEntry();
+    });
+};
+
+
+BlogController.prototype.update = function() {
+    //
+};
+
+
+BlogController.prototype.createEntry = function() {
+    var DOMList = this.el.find('.entries');
+    this.model.createEntry(DOMList);
+};
+
+
+BlogController.prototype.remove = function() {
     /*
     this.model.destroy();
     this.view.destroy();
@@ -37,3 +47,4 @@ EntryController.prototype.remove = function() {
     this.view  = null;
     this = null;
 };
+

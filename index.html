@@ -97,87 +97,29 @@
 
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-    <script src="app/models/Blog.js"></script>
+<!--
     <script src="app/models/Comment.js"></script>
     <script src="app/models/User.js"></script>
+-->
 
-    <script src="app/models/Entry.js"></script>
+    <script src="app/views/BlogView.js"></script>
+    <script src="app/controllers/BlogController.js"></script>
+    <script src="app/models/Blog.js"></script>
+
     <script src="app/views/EntryView.js"></script>
-	<script src="app/controllers/EntryController.js"></script>
+    <script src="app/controllers/EntryController.js"></script>
+    <script src="app/models/Entry.js"></script>
 
+    <script src="app/main.js"></script>
 
+<!--
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var controlers  = [];
-			var indice;
-		    var ec = new EntryController();
-			var entry = ec.model;
-			var ev = ec.view;
-			entry.update("titulo","contenido","tags");
-			ev.notify();
-			ev.notify();
-			$("#entries").append(ev.el);
 
-			var ec2 = new EntryController();
-			var entry2 = ec2.model;
-			var ev2 = ec2.view;
-			entry2.update("otro","mas","tags");
-			ev2.notify();
-			ev2.notify();
-			$("#entries").append(ev2.el);
-			controlers.push(ec);
-			controlers.push(ec2);
-
-            function remove() {
-                /*
-                controlers[indice].model = null;
-                controlers[indice].view.remove();
-                controlers[indice].pop();
-                */
-                var c = controlers[indice];
-                c.remove();
-                controlers.pop(c);
-                console.log(indice);
-            }
-
-            $('#remove').click(remove);
-
-			$("#add").click(function() {
-				indice = controlers.length;
-                console.log(indice);
-                var ec = new EntryController();
-                controlers.push(ec);
-				controlers[indice].model.update("Draft", "draft content", "draft tags");
-				controlers[indice].view.notify();
-				controlers[indice].view.notify();
-				$("#entries").append(controlers[indice].view.el);
-				$('#title').val('');
-                $('#content').val('');
-
-
-
-
-			});
-
-			$(".arrow.selectable").click(function() {
-				indice=$(this).index();
-                console.log(controlers);
-                console.log(indice);
-				$('#title').val(controlers[indice].model.title);
-                $('#content').val(controlers[indice].model.content);
-			});
-
-			$("#acceptEntry").click(function() {
-				controlers[indice].update($("#entry"));
-				controlers[indice].view.notify();
-
-			});
 
 		});
-
-
 	</script>
-
+-->
 
 </body>
 

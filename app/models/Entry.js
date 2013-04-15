@@ -1,14 +1,8 @@
 
-/*
-var Entry = function(title, content, tags, observers) {
-    this.title = title;
-    this.content = content;
-    this.tags = tags;   // TODO esto lo vamos a hacer asi al final ??
-*/
 var Entry = function() {
-    this.title     = null;
-    this.content   = null;
-    this.tags      = null;
+    this.title     = "";
+    this.content   = "";
+    this.tags      = "";
     this.comments  = [];
     this.likes     = 0;
 
@@ -27,19 +21,31 @@ Entry.prototype.like = function() {
 };
 
 
-Entry.prototype.update = function(title, content, tags) {
-    this.title   = title;
-    this.content = content;
-    this.tags    = tags;
+Entry.prototype.update = function(data) {
+    console.log("Updating Entry");
 
- /*   for (var o in this.observers) {
-        o.notify();
-    }*/
+    this.title   = data.title;
+    this.content = data.content;
+    this.tags    = data.tags;
+
+    this.notifyObservers();
+};
+
+
+Entry.prototype.notifyObservers = function() {
+    var len = this.observers.length;
+    for (var i = 0; i < len; i++) {
+        this.observers[i].notify();
+        console.log("notifico");
+    }
 };
 
 
 Entry.prototype.addObservers = function(obs) {
-    this.observers.push(obs);
+    var len = obs.length;
+    for (var i = 0; i < len; i++) {
+        this.observers.push(obs[i]);
+    }
 };
 
 

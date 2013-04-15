@@ -1,24 +1,19 @@
 
-var EntryView = function(model, el) {
+var BlogView = function(model) {
     this.model = model;
-    this.el    = el || undefined;
+    this.el = null;
 
-    this.render();  // Render the HTML
+    // this.render();
 };
 
 
-/**
- * Method invoked by the model to notify an update
- */
-EntryView.prototype.notify = function() {
-    this.render();
+BlogView.prototype.notify = function() {
+    // this.render();
 };
 
+/*
 
-/**
- * Renders the view when is created or after the model has been changed
- */
-EntryView.prototype.render = function() {
+BlogView.prototype.render = function() {
 
     //this.el = this.el || this.createDOM();
     if (! this.el) {
@@ -31,10 +26,7 @@ EntryView.prototype.render = function() {
 };
 
 
-/**
- * Creates the DOM element
- */
-EntryView.prototype.createDOM = function() {
+BlogView.prototype.createDOM = function() {
     var template = [
                     '<li class="arrow selectable">',
                         '<a href="#post" data-router="section">',
@@ -46,3 +38,5 @@ EntryView.prototype.createDOM = function() {
 
     return $(template);
 };
+
+*/

@@ -1,9 +1,20 @@
 
-var EntryView = function(model, el) {
+var EntryView = function(model) {
     this.model = model;
-    this.el    = el || undefined;
+    this.el = null;
 
-    this.render();  // Render the HTML
+    this.render();
+};
+
+/*
+EntryView.prototype.setLink = function(id) {
+    this.el.find('a').attr('href', '#'+id);
+};
+*/
+
+
+EntryView.prototype.appendInto = function(DOMList) {
+    DOMList.append( this.el );
 };
 
 
@@ -27,7 +38,6 @@ EntryView.prototype.render = function() {
 
     this.el.find('.title').text(this.model.title);
     this.el.find('.content').text(this.model.content);
-
 };
 
 

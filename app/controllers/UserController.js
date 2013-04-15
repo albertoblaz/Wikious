@@ -6,7 +6,7 @@
  * Por eso haciendolo de esta manera, esa parte del codigo solo esta escrita una vez en el 'update'
  * Y luego le paso los observadores al modelo
  */
-var EntryController = function(html) {
+var UserController = function(html) {
     this.html = html;
 
     this.model = new Entry();
@@ -19,7 +19,7 @@ var EntryController = function(html) {
 };
 
 
-EntryController.prototype.update = function() {
+UserController.prototype.update = function() {
     var newTitle   = this.html.find('.title').text();
     var newContent = this.html.find('.content').text();
     var newTags    = this.html.find('.tags').text();
@@ -28,7 +28,7 @@ EntryController.prototype.update = function() {
 };
 
 
-EntryController.prototype.remove = function() {
+UserController.prototype.remove = function() {
     /*
     this.model.destroy();
     this.view.destroy();
