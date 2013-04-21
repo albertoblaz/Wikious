@@ -1,37 +1,60 @@
-<section id="post" data-transition="slide">
+<section id="{{id}}" data-transition="slide">
 
-    <header data-title="Post nº 1" class="title">
+    <header data-title="New article" class="title">
+        <span class="title centered">New article</span>
+
         <nav>
-            <a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog"></a>
+            <a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog">
+                <span class="icon left"></span>
+                <abbr>Blog</abbr>
+            </a>
         </nav>
 
         <nav class="right">
-            <a href="#back" id="remove" data-router="section" data-icon="remove"></a>
+            <a href="#back" id="remove" data-router="section" data-icon="remove">
+                <span class="icon remove"></span>
+            </a>
         </nav>
     </header>
 
     <article class="active">
+        <style>
+            .footer {
+                padding: 7px 10px;
+                height : 12%;
+            }
+
+            .footer .button { width : 45%; }
+
+            .button .icon {
+                margin-right: 5px;
+                position: relative;
+                top: 1px;
+            }
+        </style>
 
         <form id="entry" class="form">
-            <fieldset class="title">
+            <fieldset>
                 <label>Title:</label>
                 <input id="title" type="text" value="">
             </fieldset>
 
-            <fieldset class="content">
+            <fieldset style="height: 290px;">
                 <label>Content:</label>
                 <input id="content" type="text" value="">
             </fieldset>
 
-            <fieldset class="tags">
+            <fieldset>
                 <label>Tags:</label>
                 <input id="tags" type="text" value="">
             </fieldset>
         </form>
 
         <footer class="footer">
-            <a href="#back" id="done"   data-router="section" data-icon="check"  class="button left">Done</a>
-            <a href="#back" id="cancel" data-router="section" data-icon="cancel" class="button right cancel">Cancel</a>
+            <a href="#back" id="done"   data-router="section" data-icon="check"  class="button anchor left">
+                <span class="icon check"></span>
+                Done
+            </a>
         </footer>
 
     </article>
