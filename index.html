@@ -78,9 +78,12 @@
     </section>
 
 
-    <!-- Lungo - Dependencies -->
-    <script src="components/quojs/quo.js"></script>
-    <script src="components/lungo/lungo.js"></script>
+    <!-- Project Dependencies -->
+    <script type="text/javascript" src="components/handlebars/handlebars.js"></script>
+    <script type="text/javascript" src="components/quojs/quo.js"></script>
+    <script type="text/javascript" src="components/lungo/lungo.js"></script>
+    <script type="text/javascript" src="components/jquery/jquery-2.0.0.min.js"></script>
+	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
 
     <!-- Lungo - Sandbox App -->
     <script type="text/javascript">
@@ -89,18 +92,21 @@
             version   : '0.3',
             resources : [
                             'assets/views/tops.html',
-                            'assets/views/posts.html',
-                            'assets/views/post.html'
+                            'assets/views/posts.html'
                         ]
         });
     </script>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<!--
+    <!-- Templates -->
+    <script id="post" src="assets/views/post.html" type="text/x-handlebars-template"></script>
+
+    <!-- Project MVC Source Files -->
+
+    <!--
     <script src="app/models/Comment.js"></script>
     <script src="app/models/User.js"></script>
--->
+    -->
 
     <script src="app/views/BlogView.js"></script>
     <script src="app/controllers/BlogController.js"></script>
@@ -112,15 +118,5 @@
 
     <script src="app/main.js"></script>
 
-<!--
-	<script type="text/javascript">
-		$(document).ready(function() {
-
-
-		});
-	</script>
--->
-
 </body>
-
 </html>

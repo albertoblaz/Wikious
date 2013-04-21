@@ -61,3 +61,25 @@ section > article { background-color : #F0F1F1; }
 aside .list li {
     padding : 17px 10px;
 }
+
+
+.input { height : 10%; }
+.title { height : 10%; }
+.tags { height : 10%; }
+.content { height : 80%; }
+
+.form { height : 88%; }
+
+.footer {
+    padding: 7px 10px;
+    height : 12%;
+}
+
+.footer .button { width : 45%; }
+
+.button .icon {
+    margin-right: 5px;
+    position: relative;
+    top: 1px;
+}
+
