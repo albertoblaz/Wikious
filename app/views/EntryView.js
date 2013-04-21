@@ -6,11 +6,11 @@ var EntryView = function(model) {
     this.render();
 };
 
-/*
+
 EntryView.prototype.setLink = function(id) {
     this.el.find('a').attr('href', '#'+id);
 };
-*/
+
 
 
 EntryView.prototype.appendInto = function(DOMList) {
