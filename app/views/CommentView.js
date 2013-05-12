@@ -1,9 +1,29 @@
 
-var CommentView = function(model, el) {
+var CommentView = function(model) {
     this.model = model;
-    this.el    = el || undefined;
+    this.el = null;
 
-    this.render();  // Render the HTML
+    this.render();
+};
+
+
+CommentView.prototype.appendInto = function(DOMList) {
+    DOMList.append( this.el );
+};
+
+
+/**
+ * Creates the DOM element
+ */
+CommentView.prototype.createDOM = function() {
+    var template = [
+                    '<li>',
+                        '<strong class="text"></strong>',
+                        '<small class="user"></small>',
+                    '</li>'
+                    ].join(' ');
+
+    return $(template);
 };
 
 
@@ -19,28 +39,14 @@ CommentView.prototype.notify = function() {
  * Renders the view when is created or after the model has been changed
  */
 CommentView.prototype.render = function() {
-
-    //this.el = this.el || this.createDOM();
     if (! this.el) {
         this.el = this.createDOM();
     }
 
     this.el.find('.text').text(this.model.text);
-
 };
 
 
-/**
- * Creates the DOM element
- */
-CommentView.prototype.createDOM = function() {
-    var template = [
-                    '<li class="arrow selectable">',
-                        '<a href="#post" data-router="section">',
-                            '<strong class="text"></strong>',
-                        '</a>',
-                    '</li>'
-                    ].join(' ');
-
-    return $(template);
+CommentView.prototype.remove = function() {
+    this.el.remove();
 };

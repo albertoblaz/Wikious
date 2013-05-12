@@ -4,17 +4,41 @@ var EntryView = function(model) {
     this.el = null;
 
     this.render();
+    this.setupEvents();
+};
+
+EntryView.prototype.setupEvents = function() {
+    this.el.find('.button').on('click', function() {
+        that.model.comment();
+    });
 };
 
 
 EntryView.prototype.setLink = function(id) {
-    this.el.find('a').attr('href', '#'+id);
+    this.el.find('.entry-link')[0].href = '#' + id;
 };
-
 
 
 EntryView.prototype.appendInto = function(DOMList) {
     DOMList.append( this.el );
+};
+
+
+/**
+ * Creates the DOM element
+ */
+EntryView.prototype.createDOM = function() {
+    var template = [
+                    '<li class="arrow selectable">',
+                        '<a href="#comments" data-router="section" style="margin-right: 20px;" class="button small right">Comment</a>',
+                        '<a href="#post" class="entry-link" data-router="section">',
+                            '<strong class="title"></strong>',
+                            '<small class="content"></small>',
+                        '</a>',
+                    '</li>'
+                    ].join(' ');
+
+    return $(template);
 };
 
 
@@ -30,31 +54,12 @@ EntryView.prototype.notify = function() {
  * Renders the view when is created or after the model has been changed
  */
 EntryView.prototype.render = function() {
-
-    //this.el = this.el || this.createDOM();
     if (! this.el) {
         this.el = this.createDOM();
     }
 
     this.el.find('.title').text(this.model.title);
     this.el.find('.content').text(this.model.content);
-};
-
-
-/**
- * Creates the DOM element
- */
-EntryView.prototype.createDOM = function() {
-    var template = [
-                    '<li class="arrow selectable">',
-                        '<a href="#post" data-router="section">',
-                            '<strong class="title"></strong>',
-                            '<small class="content"></small>',
-                        '</a>',
-                    '</li>'
-                    ].join(' ');
-
-    return $(template);
 };
 
 

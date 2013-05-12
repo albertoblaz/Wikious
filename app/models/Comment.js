@@ -1,23 +1,23 @@
 
-var Comment = function(user, text) {
-    this.user = user;
-    this.text = text;
-
+var Comment = function() {
+    this.text = "";
+    this.user = "";
     this.date = new Date();
+
+    this._model = new Model();
 };
 
 
-Comment.prototype.update = function(user, text, date) {
-    this.user   = user;
-    this.text = text;
-    this.date    = date;
+Comment.prototype.update = function(data) {
+    this._model.update(this, data);
+};
 
-    for (var o in this.observers) {
-        o.notify();
-    }
+
+Comment.prototype.notifyObservers = function() {
+    this._model.notifyObservers();
 };
 
 
 Comment.prototype.addObservers = function(obs) {
-    this.observers.push(obs);
+    this._model.addObservers(obs);
 };

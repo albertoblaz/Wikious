@@ -17,7 +17,6 @@ BlogController.prototype.notify = function() {
 
 
 BlogController.prototype.render = function() {
-
     this.el.find('.name').children('.title.centered').text( this.model.name );
 
     var that = this;

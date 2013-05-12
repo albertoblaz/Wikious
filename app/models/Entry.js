@@ -6,12 +6,15 @@ var Entry = function() {
     this.comments  = [];
     this.likes     = 0;
 
-    this.observers = [];
+    this._model = new Model();
 };
 
 
-Entry.prototype.comment = function(user, text) {
-    var c = new Comment(user, text);
+Entry.prototype.comment = function() {
+    var c    = new Comment();
+    var view = new CommentView(c);
+    var cont = new CommentController(c, view);
+
     this.comments.push(c);
 };
 
@@ -22,35 +25,15 @@ Entry.prototype.like = function() {
 
 
 Entry.prototype.update = function(data) {
-    console.log("Updating Entry");
-
-    this.title   = data.title;
-    this.content = data.content;
-    this.tags    = data.tags;
-
-    this.notifyObservers();
+    this._model.update(this, data);
 };
 
 
 Entry.prototype.notifyObservers = function() {
-    var len = this.observers.length;
-    for (var i = 0; i < len; i++) {
-        this.observers[i].notify();
-        console.log("notifico");
-    }
+    this._model.notifyObservers();
 };
 
 
 Entry.prototype.addObservers = function(obs) {
-    var len = obs.length;
-    for (var i = 0; i < len; i++) {
-        this.observers.push(obs[i]);
-    }
+    this._model.addObservers(obs);
 };
-
-
-/*
-Entry.prototype.destroy = function() {
-    delete this;  // Mirar si esto es correcto o no, aunque fijandolo a null se borra la ref
-};
-*/

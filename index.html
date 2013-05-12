@@ -92,14 +92,15 @@
             version   : '0.3',
             resources : [
                             'assets/views/tops.html',
-                            'assets/views/posts.html'
+                            'assets/views/posts.html',
+                            'assets/views/comments.html'
                         ]
         });
     </script>
 
 
     <!-- Templates -->
-    <script id="post" src="assets/views/post.html" type="text/x-handlebars-template"></script>
+    <!--<script id="post" src="assets/views/post.html" type="text/x-handlebars-template"></script>-->
 
     <!-- Project MVC Source Files -->
 
@@ -108,6 +109,8 @@
     <script src="app/models/User.js"></script>
     -->
 
+    <script src="app/models/Model.js"></script>
+
     <script src="app/views/BlogView.js"></script>
     <script src="app/controllers/BlogController.js"></script>
     <script src="app/models/Blog.js"></script>
@@ -115,6 +118,10 @@
     <script src="app/views/EntryView.js"></script>
     <script src="app/controllers/EntryController.js"></script>
     <script src="app/models/Entry.js"></script>
+
+    <script src="app/views/CommentView.js"></script>
+    <script src="app/controllers/CommentController.js"></script>
+    <script src="app/models/Comment.js"></script>
 
     <script src="app/main.js"></script>
 

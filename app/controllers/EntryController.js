@@ -5,7 +5,6 @@ var EntryController = function(model, view) {
     this.view  = view;
 
     this.model.addObservers( [this, this.view] );
-
     this.initWindow();
 };
 
@@ -13,7 +12,7 @@ var EntryController = function(model, view) {
 /* Private API */
 
 EntryController.prototype.initWindow = function() {
-    var id = this.setDynamicID();
+    var id = this.setDynamicID('post');
 
     this.html = this.createDOM(id);
     this.view.setLink(id);
@@ -25,12 +24,12 @@ EntryController.prototype.initWindow = function() {
 };
 
 
-EntryController.prototype.setDynamicID = function() {
+EntryController.prototype.setDynamicID = function(prefix) {
     if (! EntryController.prototype.num) {
         EntryController.prototype.num = 0;
     }
 
-    var id = 'post' + EntryController.prototype.num++;
+    var id = prefix + EntryController.prototype.num++;
     return id;
 };
 
@@ -43,7 +42,7 @@ EntryController.prototype.setupEvents = function() {
 
     this.html.find('#remove').on('click', removeHandler);
 
-    [ '#back', '#cancel', '#done' ].forEach(function(btnName) {
+    [ '#back', '#done' ].forEach(function(btnName) {
         var btn = that.html.find(btnName);
         btn.on('click', updateHandler);
     });
@@ -55,12 +54,12 @@ EntryController.prototype.createDOM = function(id) {
         '<section id="' + id + '" data-transition="slide">',
 
             '<header data-title="New article" class="title">',
-                '<span class="title centered">New article</span>',
+                '<span class="title centered">New Article</span>',
 
                 '<nav>',
                     '<a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog">',
                         '<span class="icon left"></span>',
-                        '<abbr>Blog</abbr>',
+                        '<abbr>FIWiki</abbr>',
                     '</a>',
                 '</nav>',
 
@@ -97,7 +96,7 @@ EntryController.prototype.createDOM = function(id) {
                     '</fieldset>',
 
                     '<fieldset>',
-                        '<label>Tags:</label>',
+                        '<label>Categories:</label>',
                         '<input id="tags" type="text" value="">',
                     '</fieldset>',
                 '</form>',
@@ -132,8 +131,6 @@ EntryController.prototype.checkInputData = function(data) {
 
         nIters++;
     }
-    console.log(emptyFields);
-    console.log(nIters);
 
     var valid = (emptyFields !== nIters);
     return valid;

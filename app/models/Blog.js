@@ -4,7 +4,7 @@ var Blog = function(user, name) {
     this.name    = name;
     this.entries = [];
 
-    this.observers = [];
+    this._model = new Model();
 };
 
 
@@ -20,16 +20,10 @@ Blog.prototype.createEntry = function(DOMList) {
 
 
 Blog.prototype.notifyObservers = function() {
-    var len = this.observers.length;
-    for (var i = 0; i < len; i++) {
-        this.observers[i].notify();
-    }
+    this._model.notifyObservers();
 };
 
 
 Blog.prototype.addObservers = function(obs) {
-    var len = obs.length;
-    for (var i = 0; i < len; i++) {
-        this.observers.push(obs[i]);
-    }
+    this._model.addObservers(obs);
 };
