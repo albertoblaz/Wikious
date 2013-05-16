@@ -1,7 +1,7 @@
 
 var Comment = function() {
     this.text = "";
-    this.user = "Alberto";
+    this.user = window.user;
     this.date = new Date();
 
     this._model = new Model();

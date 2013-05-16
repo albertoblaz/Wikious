@@ -61,22 +61,6 @@
 
 <body class="app">
 
-    <section id="main">
-
-        <article class="indented splash active violet">
-            <img src="assets/images/logo_splash.png">
-
-            <form class="rounded">
-                <input type="text"     placeholder="Your username" id="login-name"     value="">
-                <input type="password" placeholder="Your password" id="login-password" value="">
-
-                <a href="#posts" data-router="section" class="button big" data-icon="">Login</a>
-                <a href="#posts" data-router="section" class="button big" data-icon="">Sign up</a>
-            </form>
-        </article>
-
-    </section>
-
 
     <!-- Project Dependencies -->
     <script type="text/javascript" src="components/handlebars/handlebars.js"></script>
@@ -91,16 +75,18 @@
             name      : 'Younite',
             version   : '0.3',
             resources : [
-                            'assets/views/tops.html',
-                            'assets/views/posts.html',
-                            'assets/views/comments.html'
-                        ]
+                'assets/sections/login.html',
+                'assets/sections/sign.html',
+                'assets/sections/tops.html',
+                'assets/sections/posts.html',
+                'assets/sections/comments.html'
+            ]
         });
     </script>
 
 
     <!-- Templates -->
-    <!--<script id="post" src="assets/views/post.html" type="text/x-handlebars-template"></script>-->
+    <!--<script id="post" src="assets/sections/post.html" type="text/x-handlebars-template"></script>-->
 
     <!-- Project MVC Source Files -->
 
@@ -110,6 +96,10 @@
     -->
 
     <script src="app/models/Model.js"></script>
+
+    <script src="app/models/AuthManager.js"></script>
+    <script src="app/models/User.js"></script>
+    <script src="app/controllers/UserController.js"></script>
 
     <script src="app/models/Blog.js"></script>
     <script src="app/views/BlogView.js"></script>
