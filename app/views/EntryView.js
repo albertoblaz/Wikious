@@ -8,14 +8,13 @@ var EntryView = function(model) {
 };
 
 EntryView.prototype.setupEvents = function() {
-    this.el.find('.button').on('click', function() {
-        that.model.comment();
-    });
+    // ...
 };
 
 
-EntryView.prototype.setLink = function(id) {
-    this.el.find('.entry-link')[0].href = '#' + id;
+EntryView.prototype.setLinks = function(ids) {
+    this.el.find('.entry-link')[0].href = '#' + ids['post'];
+    this.el.find('.button')[0].href = '#' + ids['comments'];
 };
 
 
@@ -29,14 +28,14 @@ EntryView.prototype.appendInto = function(DOMList) {
  */
 EntryView.prototype.createDOM = function() {
     var template = [
-                    '<li class="arrow selectable">',
-                        '<a href="#comments" data-router="section" style="margin-right: 20px;" class="button small right">Comment</a>',
-                        '<a href="#post" class="entry-link" data-router="section">',
-                            '<strong class="title"></strong>',
-                            '<small class="content"></small>',
-                        '</a>',
-                    '</li>'
-                    ].join(' ');
+        '<li class="arrow selectable">',
+            '<a href="#comments" data-router="section" style="margin-right: 20px;" class="comment button small right">Comment</a>',
+            '<a href="#post" class="entry-link" data-router="section">',
+                '<strong class="title"></strong>',
+                '<small class="content"></small>',
+            '</a>',
+        '</li>'
+    ].join(' ');
 
     return $(template);
 };

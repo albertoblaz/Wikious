@@ -25,6 +25,11 @@ Model.prototype.notifyObservers = function() {
 };
 
 
+Model.prototype.addObserver = function(o) {
+    this.observers.push(o);
+};
+
+
 Model.prototype.addObservers = function(obs) {
     var that = this;
     obs.forEach(function(o) {

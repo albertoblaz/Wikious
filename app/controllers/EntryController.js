@@ -1,6 +1,8 @@
 
 var EntryController = function(model, view) {
-    this.html  = null;
+    this.post     = null;
+    this.comments = null;
+
     this.model = model;
     this.view  = view;
 
@@ -12,25 +14,35 @@ var EntryController = function(model, view) {
 /* Private API */
 
 EntryController.prototype.initWindow = function() {
-    var id = this.setDynamicID('post');
+    var links = this.createDynamicIDs(['post', 'comments']);
+    var pid = links['post'];
+    var cid = links['comments'];
 
-    this.html = this.createDOM(id);
-    this.view.setLink(id);
+    this.post = this.createDOMPost(pid);
+    this.comments = this.createDOMComments(cid);
+
+    this.view.setLinks(links);
 
     this.setupEvents();
     this.render();
 
-    Lungo.Router.section(id);
+    Lungo.Router.section(pid);
 };
 
 
-EntryController.prototype.setDynamicID = function(prefix) {
+EntryController.prototype.createDynamicIDs = function(prefixes) {
     if (! EntryController.prototype.num) {
         EntryController.prototype.num = 0;
     }
 
-    var id = prefix + EntryController.prototype.num++;
-    return id;
+    var links = {};
+    prefixes.forEach(function(p) {
+        var id = p + EntryController.prototype.num;
+        links[p] = id;
+    });
+
+    EntryController.prototype.num++;
+    return links;
 };
 
 
@@ -40,16 +52,23 @@ EntryController.prototype.setupEvents = function() {
     var removeHandler = function() { that.remove(); };
     var updateHandler = function() { that.update(); };
 
-    this.html.find('#remove').on('click', removeHandler);
+    this.post.find('#remove').on('click', removeHandler);
+    this.post.find('#back').on('click', updateHandler);
+    this.post.find('#done').on('click', updateHandler);
 
-    [ '#back', '#done' ].forEach(function(btnName) {
-        var btn = that.html.find(btnName);
-        btn.on('click', updateHandler);
+    this.comments.find('#write-comment').on('click', function() {
+        var comm = that.comments.find('#comment');
+        var list = that.comments.find('#comments-list');
+
+        var data = { text : comm.val() };
+        that.model.comment(list, data);
+
+        comm.val("");
     });
 };
 
 
-EntryController.prototype.createDOM = function(id) {
+EntryController.prototype.createDOMPost = function(id) {
     var template = [
         '<section id="' + id + '" data-transition="slide">',
 
@@ -120,6 +139,52 @@ EntryController.prototype.createDOM = function(id) {
 };
 
 
+EntryController.prototype.createDOMComments = function(id) {
+    var template = [
+        '<section id="' + id + '" data-transition="slide">',
+
+            '<header class="title">',
+                '<span class="title centered">Comments</span>',
+
+                '<nav>',
+                    '<a href="#back" id="back" data-router="section">',
+                        '<span class="icon left"></span>',
+                    '</a>',
+                '</nav>',
+            '</header>',
+
+
+            '<article class="active">',
+                '<form id="form" class="form">',
+                    '<fieldset style="height: 200px;">',
+                        '<label>Comment:</label>',
+                        '<input id="comment" type="text" value="">',
+                    '</fieldset>',
+
+                    '<div class="margined">',
+                        '<a href="#" id="write-comment" class="button anchor accept" data-icon="pencil" data-label="Write comment!">',
+                            '<span class="icon pencil"></span>',
+                            'Write comment!',
+                        '</a>',
+                    '</div>',
+                '</form>',
+
+                '<ul id="comments-list" class="scroll list">',
+                    '<li class="anchor dark">List of Comments</li>',
+                '</ul>',
+            '</article>',
+
+        '</section>',
+
+    ].join(" ");
+
+    var dom = $(template);
+    $('body').append(dom);
+
+    return dom;
+};
+
+
 EntryController.prototype.checkInputData = function(data) {
     var nIters = 0;
     var emptyFields = 0;
@@ -145,9 +210,9 @@ EntryController.prototype.notify = function() {
 
 
 EntryController.prototype.render = function() {
-    this.html.find('#title').val( this.model.title );
-    this.html.find('#content').val( this.model.content );
-    this.html.find('#tags').val( this.model.tags );
+    this.post.find('#title').val( this.model.title );
+    this.post.find('#content').val( this.model.content );
+    this.post.find('#tags').val( this.model.tags );
 
     Lungo.View.Article.title( this.model.title );
 };
@@ -155,9 +220,9 @@ EntryController.prototype.render = function() {
 
 EntryController.prototype.update = function() {
     var data = {
-        title   : this.html.find('#title').val(),
-        content : this.html.find('#content').val(),
-        tags    : this.html.find('#tags').val()
+        title   : this.post.find('#title').val(),
+        content : this.post.find('#content').val(),
+        tags    : this.post.find('#tags').val()
     };
 
     if (this.checkInputData(data)) {
@@ -171,7 +236,9 @@ EntryController.prototype.update = function() {
 EntryController.prototype.remove = function() {
     Lungo.Router.back();
 
-    this.model = null;
+    this.post.remove();
+    this.comments.remove();
+
     this.view.remove();
-    this.html.remove();
+    this.model = null;
 };

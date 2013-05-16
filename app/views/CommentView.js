@@ -4,6 +4,7 @@ var CommentView = function(model) {
     this.el = null;
 
     this.render();
+    this.model.addObservers([this]);
 };
 
 
@@ -17,11 +18,11 @@ CommentView.prototype.appendInto = function(DOMList) {
  */
 CommentView.prototype.createDOM = function() {
     var template = [
-                    '<li>',
-                        '<strong class="text"></strong>',
-                        '<small class="user"></small>',
-                    '</li>'
-                    ].join(' ');
+        '<li>',
+            '<strong class="text"></strong>',
+            '<small class="user"></small>',
+        '</li>'
+    ].join(' ');
 
     return $(template);
 };
@@ -44,6 +45,7 @@ CommentView.prototype.render = function() {
     }
 
     this.el.find('.text').text(this.model.text);
+    this.el.find('.user').text(this.model.user);
 };
 
 

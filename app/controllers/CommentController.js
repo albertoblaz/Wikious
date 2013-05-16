@@ -1,21 +1,32 @@
 
 var CommentController = function(model, view) {
-    this.html  = null;
+    this.html  = $('#comment-form');
 
-    this.model = new Comment();
-    this.view  = new CommentView(this.model);
+    this.model = model;
+    this.view  = view;
 
     var observers = [this, view];
     this.model.addObservers(observers);
 };
 
+CommentController.prototype.setupEvents = function() {
+    var that = this;
+
+    this.html.find('#write-comment').on('click', function() {
+        that.update();
+    });
+};
+
 
 CommentController.prototype.update = function() {
+    var textarea = this.html.find('.text');
+
     var data = {
-        text : this.html.find('.text').val()
+        text : textarea.val()
     };
 
     this.model.update(data);
+    textarea.val("");   // Remove comment typed into the text area
 };
 
 

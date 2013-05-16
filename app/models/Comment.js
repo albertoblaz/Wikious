@@ -1,7 +1,7 @@
 
 var Comment = function() {
     this.text = "";
-    this.user = "";
+    this.user = "Alberto";
     this.date = new Date();
 
     this._model = new Model();
@@ -15,6 +15,11 @@ Comment.prototype.update = function(data) {
 
 Comment.prototype.notifyObservers = function() {
     this._model.notifyObservers();
+};
+
+
+Comment.prototype.addObservers = function(o) {
+    this._model.addObserver(o);
 };
 
 

@@ -10,12 +10,16 @@ var Entry = function() {
 };
 
 
-Entry.prototype.comment = function() {
+Entry.prototype.comment = function(DOMList, data) {
     var c    = new Comment();
     var view = new CommentView(c);
-    var cont = new CommentController(c, view);
-
+    //var cont = new CommentController(c, view);
+    view.appendInto(DOMList);
+    c.update(data);
+    console.log(data);
     this.comments.push(c);
+
+    console.log("commenting");
 };
 
 
