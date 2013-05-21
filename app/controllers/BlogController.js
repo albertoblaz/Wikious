@@ -22,6 +22,9 @@ BlogController.prototype.render = function() {
     var that = this;
     this.el.find('.add-entry').on('click', function() {
         that.createEntry();
+        var pid = 'post' + (EntryController.prototype.num-1);
+        console.log(pid);
+        Lungo.Router.section(pid);
     });
 };
 

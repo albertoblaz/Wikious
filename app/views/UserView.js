@@ -1,16 +1,14 @@
 
-var EntryView = function(model, el) {
+var UserView = function(model) {
     this.model = model;
-    this.el    = el || undefined;
-
-    this.render();  // Render the HTML
+    this.el    = $('#user');
 };
 
 
 /**
  * Method invoked by the model to notify an update
  */
-EntryView.prototype.notify = function() {
+UserView.prototype.notify = function() {
     this.render();
 };
 
@@ -18,31 +16,11 @@ EntryView.prototype.notify = function() {
 /**
  * Renders the view when is created or after the model has been changed
  */
-EntryView.prototype.render = function() {
-
-    //this.el = this.el || this.createDOM();
-    if (! this.el) {
-        this.el = this.createDOM();
-    }
-
-    this.el.find('.title').text(this.model.title);
-    this.el.find('.content').text(this.model.content);
-
-};
-
-
-/**
- * Creates the DOM element
- */
-EntryView.prototype.createDOM = function() {
-    var template = [
-                    '<li class="arrow selectable">',
-                        '<a href="#post" data-router="section">',
-                            '<strong class="title"></strong>',
-                            '<small class="content"></small>',
-                        '</a>',
-                    '</li>'
-                    ].join(' ');
-
-    return $(template);
+UserView.prototype.render = function() {
+    var that = this;
+    [ 'nick', 'name', 'email', 'age', 'location' ].forEach(function(elem) {
+        var data = that.model[elem];
+        that.el.find('#' + elem).text( data );
+    });
+    console.log(this.model);
 };

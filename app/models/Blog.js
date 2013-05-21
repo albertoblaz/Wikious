@@ -11,7 +11,6 @@ Blog.prototype.createEntry = function(DOMList) {
     var entry = new Entry();
     var view  = new EntryView(entry);
     var cont  = new EntryController(entry, view);
-    //var cont2 = new EntryCommentsController(entry);
 
     view.appendInto(DOMList);
 

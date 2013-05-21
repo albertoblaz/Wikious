@@ -2,7 +2,7 @@
 var Comment = function() {
     this.text = "";
     this.user = window.user;
-    this.date = new Date();
+    this.date = new Date().toTimeString().slice(0,5);
 
     this._model = new Model();
 };

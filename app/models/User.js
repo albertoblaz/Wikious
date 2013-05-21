@@ -1,5 +1,6 @@
 
 var User = function(data) {
+    this.nick = "" || (data && data.nick);
     this.name = "" || (data && data.name);
     this.pass = "" || (data && data.pass);
 
@@ -7,18 +8,38 @@ var User = function(data) {
     this.age      = "" || (data && data.age);
     this.location = "" || (data && data.location);
 
-    this.auth = null;
+    this.auth = (data && data.auth) || null;
     this._model = new Model();
 };
 
 
-User.prototype.login = function() {
-    return this.auth.login(this);
+User.prototype.login = function(data) {
+    if (data) {
+        this.update(data);
+    }
+
+    var res = {};
+    if (! this.auth) {
+        res.success = false;
+        res.user    = null;
+    }
+
+    var loggedUser = this.auth.login(this);
+    res.success = true;
+    res.user = loggedUser;
+
+    return res;
 };
 
 
-User.prototype.signup = function() {
-    return this.auth.signup(this);
+User.prototype.signup = function(data) {
+    if (data) {
+        this.update(data);
+    }
+
+    var success = this.auth && this.auth.signup(this);
+    this.notifyObservers();
+    return success;
 };
 
 

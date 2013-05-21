@@ -19,8 +19,10 @@ CommentView.prototype.appendInto = function(DOMList) {
 CommentView.prototype.createDOM = function() {
     var template = [
         '<li>',
+            '<span class="icon user"></span>',
+            '<span class="right date"></span>',
             '<strong class="text"></strong>',
-            '<small class="user"></small>',
+            '<small class="usernick"></small>',
         '</li>'
     ].join(' ');
 
@@ -45,7 +47,8 @@ CommentView.prototype.render = function() {
     }
 
     this.el.find('.text').text(this.model.text);
-    this.el.find('.user').text(this.model.user);
+    this.el.find('.usernick').text(this.model.user.nick);
+    this.el.find('.date').text(this.model.date);
 };
 
 

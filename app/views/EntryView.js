@@ -28,12 +28,14 @@ EntryView.prototype.appendInto = function(DOMList) {
  */
 EntryView.prototype.createDOM = function() {
     var template = [
-        '<li class="arrow selectable">',
-            '<a href="#comments" data-router="section" style="margin-right: 20px;" class="comment button small right">Comment</a>',
+        '<li class="arrow selectable" style="height: 130px;">',
             '<a href="#post" class="entry-link" data-router="section">',
                 '<strong class="title"></strong>',
-                '<small class="content"></small>',
+                '<small style="margin-top: 5px; margin-right: 10px; white-space: inherit;" class="content"></small>',
             '</a>',
+            '<a href="#comments" data-router="section" style="width : 40%; margin-top: 10px;" class="button small left  comment">Comment</a>',
+            '<a href="#rate"     data-router="section" style="width : 40%; margin-top: 10px; margin-right: 20px;" class="button small right rate">Rate</a>',
+            '<div class="clear"></div>',
         '</li>'
     ].join(' ');
 
@@ -58,7 +60,7 @@ EntryView.prototype.render = function() {
     }
 
     this.el.find('.title').text(this.model.title);
-    this.el.find('.content').text(this.model.content);
+    this.el.find('.content').text(this.model.content.slice(0, 140) + "...");
 };
 
 

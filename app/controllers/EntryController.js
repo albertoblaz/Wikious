@@ -25,8 +25,6 @@ EntryController.prototype.initWindow = function() {
 
     this.setupEvents();
     this.render();
-
-    Lungo.Router.section(pid);
 };
 
 
@@ -57,23 +55,18 @@ EntryController.prototype.setupEvents = function() {
     this.post.find('#done').on('click', updateHandler);
 
     this.comments.find('#write-comment').on('click', function() {
-        var comm = that.comments.find('#comment');
-        var list = that.comments.find('#comments-list');
-
-        var data = { text : comm.val() };
-        that.model.comment(list, data);
-
-        comm.val("");
+        that.comment();
     });
 };
 
 
 EntryController.prototype.createDOMPost = function(id) {
+    var title = this.model.title || 'New article';
     var template = [
         '<section id="' + id + '" data-transition="slide">',
 
-            '<header data-title="New article" class="title">',
-                '<span class="title centered">New Article</span>',
+            '<header class="title">',
+                '<span class="title centered">' + title + '</span>',
 
                 '<nav>',
                     '<a href="#back" id="back" data-router="section" data-icon="left" data-label="Blog">',
@@ -103,20 +96,25 @@ EntryController.prototype.createDOMPost = function(id) {
                     '}',
                 '</style>',
 
-                '<form id="entry" class="form">',
+                '<form id="entry" class="form" style="height: 75%">',
                     '<fieldset>',
                         '<label>Title:</label>',
                         '<input id="title" type="text" value="">',
                     '</fieldset>',
 
-                    '<fieldset style="height: 290px;">',
+                    '<fieldset style="height: 80%;">',
                         '<label>Content:</label>',
-                        '<input id="content" type="text" value="">',
+                        '<textarea id="content" type="text" value="" style="height: 90%;"></textarea>',
                     '</fieldset>',
 
                     '<fieldset>',
                         '<label>Categories:</label>',
                         '<input id="tags" type="text" value="">',
+                    '</fieldset>',
+
+                    '<fieldset>',
+                        '<label>Rate:</label>',
+                        '<input id="rate" type="range" min="1" max="10">',
                     '</fieldset>',
                 '</form>',
 
@@ -174,7 +172,7 @@ EntryController.prototype.createDOMComments = function(id) {
                 '</ul>',
             '</article>',
 
-        '</section>',
+        '</section>'
 
     ].join(" ");
 
@@ -202,6 +200,17 @@ EntryController.prototype.checkInputData = function(data) {
 };
 
 
+EntryController.prototype.comment = function() {
+    var comm = this.comments.find('#comment');
+    var list = this.comments.find('#comments-list');
+
+    var data = { text : comm.val() };
+    this.model.comment(list, data);
+
+    comm.val("");
+};
+
+
 /* Public API */
 
 EntryController.prototype.notify = function() {
@@ -222,7 +231,7 @@ EntryController.prototype.update = function() {
     var data = {
         title   : this.post.find('#title').val(),
         content : this.post.find('#content').val(),
-        tags    : this.post.find('#tags').val()
+        tags    : this.post.find('#tags').val().split(", ")
     };
 
     if (this.checkInputData(data)) {

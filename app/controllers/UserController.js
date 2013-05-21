@@ -1,11 +1,12 @@
 
-var UserController = function(model) {
+var UserController = function(model, view) {
     this.htmlLogin = $('#login');
     this.htmlSign  = $('#sign');
 
     this.model = model;
+    this.view = view;
 
-    this.model.addObservers([this]);
+    this.model.addObservers([this, view]);
     this.initWindow();
 };
 
@@ -17,11 +18,15 @@ UserController.prototype.initWindow = function() {
 
 
 UserController.prototype.loginHandler = function() {
-    this.update();
-    var success = this.model.login();
+    var res = this.model.login();
 
-    if (success) {
-        Lungo.Router.section('posts');
+    if (res.success) {
+        window.user     = res.user;
+        this.model      = res.user;
+        this.view.model = res.user;
+
+        this.view.render();
+        Lungo.Router.section('#posts');
 
     } else {
         Lungo.Notification.error(
@@ -36,8 +41,6 @@ UserController.prototype.loginHandler = function() {
 
 UserController.prototype.signupHandler = function() {
     var that = this;
-
-    this.updateSignup();
     var success = this.model.signup();
 
     if (success) {
@@ -67,11 +70,13 @@ UserController.prototype.setupEvents = function() {
 
     this.htmlLogin.find('#login-btn').on('click', function(event) {
         event.preventDefault();
+        that.update();
         that.loginHandler();
     });
 
     this.htmlSign.find('#create-btn').on('click', function(event) {
         event.preventDefault();
+        that.updateSignup();
         that.signupHandler();
     });
 };
@@ -89,7 +94,7 @@ UserController.prototype.render = function() {
 
 UserController.prototype.update = function() {
     var data = {
-        name : this.htmlLogin.find('#name').val(),
+        nick : this.htmlLogin.find('#nick').val(),
         pass : this.htmlLogin.find('#pass').val()
     };
 
@@ -101,6 +106,7 @@ UserController.prototype.update = function() {
 
 UserController.prototype.updateSignup = function() {
     var data = {
+        nick     : this.htmlSign.find('#nick').val(),
         name     : this.htmlSign.find('#name').val(),
         pass     : this.htmlSign.find('#pass').val(),
         email    : this.htmlSign.find('#email').val(),
@@ -134,3 +140,4 @@ UserController.prototype.checkInputData = function(data) {
 UserController.prototype.remove = function() {
     //
 };
+
