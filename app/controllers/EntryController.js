@@ -14,9 +14,9 @@ var EntryController = function(model, view) {
 /* Private API */
 
 EntryController.prototype.initWindow = function() {
-    var links = this.createDynamicIDs(['post', 'comments']);
+    var links = this.createDynamicIDs(['post', 'comment']);
     var pid = links['post'];
-    var cid = links['comments'];
+    var cid = links['comment'];
 
     this.post = this.createDOMPost(pid);
     this.comments = this.createDOMComments(cid);
@@ -47,16 +47,14 @@ EntryController.prototype.createDynamicIDs = function(prefixes) {
 EntryController.prototype.setupEvents = function() {
     var that = this;    // JavaScript workaround
 
-    var removeHandler = function() { that.remove(); };
-    var updateHandler = function() { that.update(); };
+    var removeHandler  = function() { that.remove();  };
+    var updateHandler  = function() { that.update();  };
+    var commentHandler = function() { that.comment(); };
 
+    // this.post.find('#back').on('click', updateHandler);
     this.post.find('#remove').on('click', removeHandler);
-    this.post.find('#back').on('click', updateHandler);
     this.post.find('#done').on('click', updateHandler);
-
-    this.comments.find('#write-comment').on('click', function() {
-        that.comment();
-    });
+    this.comments.find('#write-comment').on('click', commentHandler);
 };
 
 
@@ -102,7 +100,7 @@ EntryController.prototype.createDOMPost = function(id) {
                         '<input id="title" type="text" value="">',
                     '</fieldset>',
 
-                    '<fieldset style="height: 80%;">',
+                    '<fieldset style="height: 66%;">',
                         '<label>Content:</label>',
                         '<textarea id="content" type="text" value="" style="height: 90%;"></textarea>',
                     '</fieldset>',
@@ -113,8 +111,13 @@ EntryController.prototype.createDOMPost = function(id) {
                     '</fieldset>',
 
                     '<fieldset>',
-                        '<label>Rate:</label>',
-                        '<input id="rate" type="range" min="1" max="10">',
+                        '<label>Created:</label>',
+                        '<input id="dateCreation" type="text" value="" readonly>',
+                    '</fieldset>',
+
+                    '<fieldset>',
+                        '<label>Last Edit:</label>',
+                        '<input id="dateLastEdition" type="text" value="" readonly>',
                     '</fieldset>',
                 '</form>',
 
@@ -205,9 +208,10 @@ EntryController.prototype.comment = function() {
     var list = this.comments.find('#comments-list');
 
     var data = { text : comm.val() };
-    this.model.comment(list, data);
-
-    comm.val("");
+    if (data.text) {
+        this.model.comment(list, data);
+        comm.val("");
+    }
 };
 
 
@@ -219,15 +223,19 @@ EntryController.prototype.notify = function() {
 
 
 EntryController.prototype.render = function() {
-    this.post.find('#title').val( this.model.title );
-    this.post.find('#content').val( this.model.content );
-    this.post.find('#tags').val( this.model.tags );
+    var that = this;
+
+    var fields = [ 'title', 'content', 'tags', 'dateCreation', 'dateLastEdition' ];
+    fields.forEach(function(f) {
+        that.post.find('#' + f).val( that.model[f] );
+    });
 
     Lungo.View.Article.title( this.model.title );
 };
 
 
 EntryController.prototype.update = function() {
+    var d = new Date();
     var data = {
         title   : this.post.find('#title').val(),
         content : this.post.find('#content').val(),

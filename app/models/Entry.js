@@ -4,12 +4,22 @@ var Entry = function() {
     this.content   = "";
     this.tags      = "";
     this.comments  = [];
-    this.votes     = {
-        num   : 0,
-        score : 0
+
+    this.dateFormat("dateCreation");
+    this.dateFormat("dateLastEdition");
+
+    this.score = {
+        num    : 0,
+        points : 0
     };
 
     this._model = new Model();
+};
+
+
+Entry.prototype.dateFormat = function(field) {
+    var d = new Date();
+    this[field] = d.toTimeString().slice(0,5) + d.toDateString().slice(3);
 };
 
 
@@ -25,26 +35,16 @@ Entry.prototype.comment = function(DOMList, data) {
 };
 
 
-Entry.prototype.rate = function(points) {
-    this.votes.num++;
-    this.votes.score += points;
+Entry.prototype.rate = function(value) {
+    this.score.num++;
+    this.score.points += value;
+    this.notifyObservers();
 };
 
 
 Entry.prototype.update = function(data) {
-    var tag;
-    var aux = [];
-/*
-    if (data && data.tags) {
-        data.tags.forEach(function(t) {
-            tag = new Tag(t);
-            aux.push(tag);
-        });
-
-        data.tags = aux;
-    }
-*/
     this._model.update(this, data);
+    this.dateFormat("dateLastEdition");
 };
 
 

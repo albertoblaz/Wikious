@@ -13,8 +13,13 @@ EntryView.prototype.setupEvents = function() {
 
 
 EntryView.prototype.setLinks = function(ids) {
-    this.el.find('.entry-link')[0].href = '#' + ids['post'];
-    this.el.find('.button')[0].href = '#' + ids['comments'];
+    for (var i in ids) {
+        if (ids.hasOwnProperty(i)) {
+            var elem = this.el.find('.' + i)[0];
+            var link = '#' + ids[i];
+            elem.href = link;
+        }
+    }
 };
 
 
@@ -29,11 +34,11 @@ EntryView.prototype.appendInto = function(DOMList) {
 EntryView.prototype.createDOM = function() {
     var template = [
         '<li class="arrow selectable" style="height: 130px;">',
-            '<a href="#post" class="entry-link" data-router="section">',
+            '<a href="#post" class="post" data-router="section">',
                 '<strong class="title"></strong>',
                 '<small style="margin-top: 5px; margin-right: 10px; white-space: inherit;" class="content"></small>',
             '</a>',
-            '<a href="#comments" data-router="section" style="width : 40%; margin-top: 10px;" class="button small left  comment">Comment</a>',
+            '<a href="#comments" data-router="section" style="width : 40%; margin-top: 10px;" class="button small left comment">Comment</a>',
             '<a href="#rate"     data-router="section" style="width : 40%; margin-top: 10px; margin-right: 20px;" class="button small right rate">Rate</a>',
             '<div class="clear"></div>',
         '</li>'

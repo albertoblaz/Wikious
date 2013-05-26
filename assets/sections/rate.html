@@ -16,13 +16,16 @@
 
                 <div style="font-size: 8em;margin-top: 30%;">
                     ¿
-                    <label style="font-size: 2em;" class="points">8</label>
+                    <label style="font-size: 1.5em;" id="points" class="points">8</label>
                     ?
                 </div>
             </div>
 
             <form style="margin-top: 7%;">
-                <label>Rate this article</label>
+                <p style="text-align: center; margin-bottom: 20px; font-size: 1.5em;">
+                    Average score:
+                    <label id="average" style="margin-left: 5px;"></label>
+                </p>
                 <input type="range" min="0" max="10" value="5">
                 <a href="#" style="margin-top: 25px;" class="button anchor accept">Submit vote!</a>
             </form>

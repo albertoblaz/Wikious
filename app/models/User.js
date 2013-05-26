@@ -14,19 +14,24 @@ var User = function(data) {
 
 
 User.prototype.login = function(data) {
+    var res = {
+        success : false,
+        user : null
+    };
+
+    if (! this.auth) {
+        return res;
+    }
+
     if (data) {
         this.update(data);
     }
 
-    var res = {};
-    if (! this.auth) {
-        res.success = false;
-        res.user    = null;
-    }
-
     var loggedUser = this.auth.login(this);
-    res.success = true;
-    res.user = loggedUser;
+    if (loggedUser) {
+        res.success = true;
+        res.user = loggedUser;
+    }
 
     return res;
 };

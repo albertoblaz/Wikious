@@ -22,5 +22,4 @@ UserView.prototype.render = function() {
         var data = that.model[elem];
         that.el.find('#' + elem).text( data );
     });
-    console.log(this.model);
 };

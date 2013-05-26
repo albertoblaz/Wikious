@@ -26,13 +26,19 @@ Model.prototype.notifyObservers = function() {
 
 
 Model.prototype.addObserver = function(o) {
-    this.observers.push(o);
+    var contained = this.observers.some(function(obs) {
+        return obs == o;
+    });
+
+    if (! contained) {
+        this.observers.push(o);
+    }
 };
 
 
 Model.prototype.addObservers = function(obs) {
     var that = this;
     obs.forEach(function(o) {
-        that.observers.push(o);
+        that.addObserver(o);
     });
 };
