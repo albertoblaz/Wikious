@@ -16,12 +16,6 @@ Tag.prototype.add = function(article) {
 
 
 Tag.prototype.remove = function(article) {
-    /*
-    this.articles = this.articles.map(function(a) {
-        return a !== article;
-    });
-    */
-
     var i = this.articles.indexOf(article);
     this.articles.splice(i, 1);
     this.notifyObservers();

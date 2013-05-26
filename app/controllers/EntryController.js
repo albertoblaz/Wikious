@@ -239,11 +239,12 @@ EntryController.prototype.render = function() {
 EntryController.prototype.filterTags = function() {
     var domTags = this.post.find('#tags').val();
     var tags = domTags.split(",");
-
+/*
     if (typeof tags === "string") {
         tags = domTags.split(" ");
     }
-
+*/
+    tags = tags.map(function(t) { return t.trim(); });
     return tags;
 };
 

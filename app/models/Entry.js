@@ -4,15 +4,11 @@ var Entry = function() {
     this.content   = "";
     this.tags      = [];
     this.comments  = [];
+    this.score     = new Score();
 
     this.tagsManager = null;
     this.dateFormat("dateCreation");
     this.dateFormat("dateLastEdition");
-
-    this.score = {
-        num    : 0,
-        points : 0
-    };
 
     this.DOM = {
         comments : null
@@ -40,14 +36,13 @@ Entry.prototype.comment = function(data) {
 
 
 Entry.prototype.rate = function(value) {
-    this.score.num++;
-    this.score.points += value;
+    this.score.rate(value);
     this.notifyObservers();
 };
 
 
-Entry.prototype.remove = function() {
-    this.tagsManager.untag(this, this.tags);
+Entry.prototype.averageScore = function() {
+    return this.score.average();
 };
 
 
@@ -70,4 +65,9 @@ Entry.prototype.notifyObservers = function() {
 
 Entry.prototype.addObservers = function(obs) {
     this._model.addObservers(obs);
+};
+
+
+Entry.prototype.remove = function() {
+    this.tagsManager.untag(this, this.tags);
 };

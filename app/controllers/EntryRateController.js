@@ -55,7 +55,10 @@ EntryRateController.prototype.setupEvents = function() {
         $(this).removeClass('accept')
                .addClass('disabled')
                .text("Thanks for rating!")
-               .off(rateHandler);
+               .off('click', rateHandler)
+               .on('click', function(event) {
+                    event.preventDefault();
+               });
     };
 
     this.html.find('#rate-btn').on('click', rateHandler);
@@ -128,16 +131,7 @@ EntryRateController.prototype.notify = function() {
 
 
 EntryRateController.prototype.render = function() {
-    var avg;
-    var score = this.model.score;
-
-    if (score.num) {
-        avg = score.points / score.num;
-    } else {
-        avg = "-";
-    }
-
-    // this.html.find('#points').val(  );
+    var avg = this.model.averageScore() || "No rated";
     this.html.find('#average').text( avg );
 };
 

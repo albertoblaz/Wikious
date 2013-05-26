@@ -34,5 +34,8 @@ TagsManager.prototype.untag = function(article, tags) {
     tags.forEach(function(tagName) {
         var t = that.tags[tagName];
         t.remove(article);
+        if (! t.count()) {
+            delete that.tags[tagName];
+        }
     });
 };
