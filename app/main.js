@@ -1,16 +1,14 @@
 
 (function () {
 
-    // Create Own User
-    var auth = new AuthManager();
+    window.auth = new AuthManager();
 
+    // Create Own User
     var user     = new User();
-    user.auth = auth;
     var userView = new UserView(user);
     var userCont = new UserController(user, userView);
 
     window.user = user;
-
 
 
     // Create Users in the system
@@ -39,67 +37,50 @@
 
     // Create Wiki
     var wiki = new Blog("FIWiki");
-    var wikiView = new BlogView(wiki);
-    var wikiCont = new BlogController(wiki, wikiView);
+    var wikiCont = new BlogController(wiki, null);
+    var wikiCont2 = new BlogTagsController(wiki, null);
 
     window.wiki = wiki;
+    wiki.notifyObservers();
 
 
-    // Create Entries
-    var datas = [
-        {
-            title : 'Software Design',
-            content : 'Software design is the process by which an agent creates a specification of a software artifact, intended to accomplish goals, using a set of primitive components and subject to constraints. Software design may refer to either "all the activities involved in conceptualizing, framing, implementing, commissioning, and ultimately modifying complex systems" or "the activity following requirements specification and before programming, as a stylized software engineering process."',
-            tags : 'software, design',
-            dateCreation : "12:45 Apr 13 2013",
-            score : {
-                num : 2,
-                points : 16
-            }
-        },
-
-        {
-            title : 'Software Architecture',
-            content : 'The term software architecture intuitively denotes the high level structures of a software system. It can be defined as the set of structures needed to reason about the software system, which comprise the software elements, the relations between them, and the properties of both elements and relations. The term software architecture also denotes the set of practices used to select, define or design a software architecture.',
-            tags : 'software, architecture',
-            dateCreation : "08:31 May 02 2012",
-            score : {
-                num : 1,
-                points : 5
-            }
+    // Create Entry #1
+    var entry = wiki.createEntry({
+        title : 'Software Design',
+        content : 'Software design is the process by which an agent creates a specification of a software artifact, intended to accomplish goals, using a set of primitive components and subject to constraints. Software design may refer to either "all the activities involved in conceptualizing, framing, implementing, commissioning, and ultimately modifying complex systems" or "the activity following requirements specification and before programming, as a stylized software engineering process."',
+        tags : ['software', 'design'],
+        dateCreation : "12:45 Apr 13 2013",
+        score : {
+            num : 2,
+            points : 16
         }
-    ];
+    });
 
-    var wc = true;
-    datas.forEach(function(data) {
-        var entry = new Entry();
-        var view  = new EntryView(entry);
-        var cont  = new EntryController(entry, view);
-        var cont2 = new EntryRateController(entry, view);
 
-        var DOMList = $('#posts').find('.entries');
-        view.appendInto(DOMList);
+    // Create 2 Comments for Entry #1
+    entry.comment({
+        text : "Amazing article!",
+        user : luis,
+        date : "2 days"
+    });
 
-        entry.update(data);
+    entry.comment({
+        text : "Great explanation",
+        user : jose,
+        date : "1 day"
+    });
 
-        if (wc) {
-            var list = cont.comments.find('#comments-list');
-            entry.comment(list, {
-                text : "Amazing article!",
-                user : luis,
-                date : "2 days"
-            });
 
-            entry.comment(list, {
-                text : "Great explanation",
-                user : jose,
-                date : "1 day"
-            });
-
-            wc = false;
+    // Create Entry #2
+    wiki.createEntry({
+        title : 'Software Architecture',
+        content : 'The term software architecture intuitively denotes the high level structures of a software system. It can be defined as the set of structures needed to reason about the software system, which comprise the software elements, the relations between them, and the properties of both elements and relations. The term software architecture also denotes the set of practices used to select, define or design a software architecture.',
+        tags : ['software', 'architecture'],
+        dateCreation : "08:31 May 02 2012",
+        score : {
+            num : 1,
+            points : 5
         }
-
-        window.wiki.entries.push(entry);
     });
 
 })();

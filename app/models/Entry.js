@@ -2,15 +2,20 @@
 var Entry = function() {
     this.title     = "";
     this.content   = "";
-    this.tags      = "";
+    this.tags      = [];
     this.comments  = [];
 
+    this.tagsManager = null;
     this.dateFormat("dateCreation");
     this.dateFormat("dateLastEdition");
 
     this.score = {
         num    : 0,
         points : 0
+    };
+
+    this.DOM = {
+        comments : null
     };
 
     this._model = new Model();
@@ -23,14 +28,13 @@ Entry.prototype.dateFormat = function(field) {
 };
 
 
-Entry.prototype.comment = function(DOMList, data) {
+Entry.prototype.comment = function(data) {
     var c    = new Comment();
     var view = new CommentView(c);
     //var cont = new CommentController(c, view);
-    view.appendInto(DOMList);
+    view.appendInto(this.DOM.comments);
 
     c.update(data);
-
     this.comments.push(c);
 };
 
@@ -42,8 +46,19 @@ Entry.prototype.rate = function(value) {
 };
 
 
+Entry.prototype.remove = function() {
+    this.tagsManager.untag(this, this.tags);
+};
+
+
 Entry.prototype.update = function(data) {
+    var that = this;
+
+    this.tagsManager.untag(this, this.tags);
+
     this._model.update(this, data);
+    this.tagsManager.tag(this, data.tags);
+
     this.dateFormat("dateLastEdition");
 };
 

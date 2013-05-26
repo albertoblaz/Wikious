@@ -5,9 +5,26 @@ var BlogController = function(model, view) {
     this.model = model;
     this.view  = view;
 
-    this.render();
-
+    this.initWindow();
     this.model.addObservers( [this, this.view] );
+};
+
+
+BlogController.prototype.initWindow = function() {
+    this.model.DOM.articles = this.el.find('.entries');
+    this.setupEvents();
+    this.render();
+};
+
+
+BlogController.prototype.setupEvents = function() {
+    var that = this;
+
+    this.el.find('.add-entry').on('click', function() {
+        that.createEntry();
+        var pid = 'post' + (EntryController.prototype.num-1);
+        Lungo.Router.section(pid);
+    });
 };
 
 
@@ -18,14 +35,6 @@ BlogController.prototype.notify = function() {
 
 BlogController.prototype.render = function() {
     this.el.find('.name').children('.title.centered').text( this.model.name );
-
-    var that = this;
-    this.el.find('.add-entry').on('click', function() {
-        that.createEntry();
-        var pid = 'post' + (EntryController.prototype.num-1);
-        console.log(pid);
-        Lungo.Router.section(pid);
-    });
 };
 
 
@@ -35,8 +44,7 @@ BlogController.prototype.update = function() {
 
 
 BlogController.prototype.createEntry = function() {
-    var DOMList = this.el.find('.entries');
-    this.model.createEntry(DOMList);
+    this.model.createEntry();
 };
 
 

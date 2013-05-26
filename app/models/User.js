@@ -8,7 +8,7 @@ var User = function(data) {
     this.age      = "" || (data && data.age);
     this.location = "" || (data && data.location);
 
-    this.auth = (data && data.auth) || null;
+    this.auth = window.auth;
     this._model = new Model();
 };
 

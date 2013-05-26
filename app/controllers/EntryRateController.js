@@ -86,7 +86,7 @@ EntryRateController.prototype.createDOM = function(id) {
 
                         '<div style="font-size: 8em;margin-top: 30%;">',
                             '<label class="interrogant">¿</label>',
-                            '<label style="font-size: 1.5em;" id="points" class="points"></label>',
+                            '<label style="font-size: 1.25em;" id="points" class="points"></label>',
                             '<label class="interrogant">?</label>',
                         '</div>',
                     '</div>',

@@ -30,11 +30,9 @@
 <body class="app">
 
     <!-- Project Dependencies -->
-    <script type="text/javascript" src="components/handlebars/handlebars.js"></script>
     <script type="text/javascript" src="components/quojs/quo.js"></script>
     <script type="text/javascript" src="components/lungo/lungo.js"></script>
     <script type="text/javascript" src="components/jquery/jquery-2.0.0.min.js"></script>
-	<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
 
     <!-- Lungo - Sandbox App -->
     <script type="text/javascript">
@@ -44,28 +42,30 @@
             resources : [
                 'assets/sections/login.html',
                 'assets/sections/sign.html',
-                'assets/sections/tops.html',
                 'assets/sections/posts.html',
+                'assets/sections/tags.html',
+                'assets/sections/tops.html',
                 'assets/sections/user.html'
             ]
         });
     </script>
 
 
-    <!-- Templates -->
-    <!--<script id="post" src="assets/sections/post.html" type="text/x-handlebars-template"></script>-->
-
     <!-- Project MVC Source Files -->
     <script src="app/models/Model.js"></script>
 
     <script src="app/models/AuthManager.js"></script>
+    <script src="app/models/TagsManager.js"></script>
+
     <script src="app/models/User.js"></script>
     <script src="app/views/UserView.js"></script>
-    <script src="app/controllers/UserController.js"></script>
+    <script src="app/controllers/UserLoginController.js"></script>
+    <script src="app/controllers/UserSignupController.js"></script>
 
-    <script src="app/models/Blog.js"></script>
-    <script src="app/views/BlogView.js"></script>
-    <script src="app/controllers/BlogController.js"></script>
+    <script src="app/models/Wiki.js"></script>
+    <script src="app/controllers/WikiArticlesController.js"></script>
+    <script src="app/controllers/WikiTagsController.js"></script>
+    <script src="app/controllers/WikiTopsController.js"></script>
 
     <script src="app/models/Entry.js"></script>
     <script src="app/views/EntryView.js"></script>
@@ -74,9 +74,10 @@
 
     <script src="app/models/Comment.js"></script>
     <script src="app/views/CommentView.js"></script>
-<!--
-    <script src="app/controllers/CommentController.js"></script>
--->
+
+    <script src="app/models/Tag.js"></script>
+    <script src="app/views/TagView.js"></script>
+
     <script src="app/main.js"></script>
 
 </body>

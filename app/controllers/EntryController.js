@@ -21,6 +21,9 @@ EntryController.prototype.initWindow = function() {
     this.post = this.createDOMPost(pid);
     this.comments = this.createDOMComments(cid);
 
+    var list = this.comments.find('#comments-list');
+    this.model.DOM.comments = list;
+
     this.view.setLinks(links);
 
     this.setupEvents();
@@ -205,11 +208,10 @@ EntryController.prototype.checkInputData = function(data) {
 
 EntryController.prototype.comment = function() {
     var comm = this.comments.find('#comment');
-    var list = this.comments.find('#comments-list');
 
     var data = { text : comm.val() };
     if (data.text) {
-        this.model.comment(list, data);
+        this.model.comment(data);
         comm.val("");
     }
 };
@@ -234,12 +236,23 @@ EntryController.prototype.render = function() {
 };
 
 
+EntryController.prototype.filterTags = function() {
+    var domTags = this.post.find('#tags').val();
+    var tags = domTags.split(",");
+
+    if (typeof tags === "string") {
+        tags = domTags.split(" ");
+    }
+
+    return tags;
+};
+
+
 EntryController.prototype.update = function() {
-    var d = new Date();
     var data = {
         title   : this.post.find('#title').val(),
         content : this.post.find('#content').val(),
-        tags    : this.post.find('#tags').val().split(", ")
+        tags    : this.filterTags()
     };
 
     if (this.checkInputData(data)) {
@@ -257,5 +270,6 @@ EntryController.prototype.remove = function() {
     this.comments.remove();
 
     this.view.remove();
+    this.model.remove();
     this.model = null;
 };

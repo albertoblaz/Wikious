@@ -33,7 +33,7 @@ EntryView.prototype.appendInto = function(DOMList) {
  */
 EntryView.prototype.createDOM = function() {
     var template = [
-        '<li class="arrow selectable" style="height: 130px;">',
+        '<li class="arrow" style="height: 130px;">',
             '<a href="#post" class="post" data-router="section">',
                 '<strong class="title"></strong>',
                 '<small style="margin-top: 5px; margin-right: 10px; white-space: inherit;" class="content"></small>',

@@ -25,6 +25,17 @@ Model.prototype.notifyObservers = function() {
 };
 
 
+Model.prototype.destroyObservers = function() {
+    var method = 'remove';
+
+    this.observers.forEach(function(obs) {
+        if (obs.hasOwnProperty(method)) {
+            obs[method]();
+        }
+    });
+};
+
+
 Model.prototype.addObserver = function(o) {
     var contained = this.observers.some(function(obs) {
         return obs == o;
@@ -39,6 +50,6 @@ Model.prototype.addObserver = function(o) {
 Model.prototype.addObservers = function(obs) {
     var that = this;
     obs.forEach(function(o) {
-        that.addObserver(o);
+        if (o) that.addObserver(o);
     });
 };
