@@ -1,7 +1,7 @@
 # Wikious
 
 Mobile application implemented with HTML5, CSS3 and JavaScript, using Lungo.js as a base framework.
-This project was created just with academic purposes, for a Software Design course in the European Master of Software Engineering, given by the Technical University of Madrid.
+This project was created just with academic purposes, for a Software Object-Oriented Design course in the European Master of Software Engineering, given by the Technical University of Madrid.
 
 
 ## Features
