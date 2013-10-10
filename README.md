@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/albertoblaz/Wikious.png?label=ready)](https://waffle.io/albertoblaz/Wikious)  
 # Wikious
 
 Mobile application implemented with HTML5, CSS3 and JavaScript, using Lungo.js as a base framework.
@@ -15,9 +16,9 @@ This project was created just with academic purposes, for a Software Object-Orie
 
 ## Contributing
 
-* [Alberto Blázquez][1] ([@albertoblaz][2])
+* [Alberto BlC!zquez][1] ([@albertoblaz][2])
 * Luis Mayorga
-* José Arias
+* JosC) Arias
 
 
 ## Project information
